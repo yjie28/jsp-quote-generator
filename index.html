@@ -4,11 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quote Generator</title>
-    <link
-      rel="icon"
-      type="img/png"
-      href="http://www.google.com/s2/favicons?domain=funamusea.com"
-    />
+    <link rel="icon" type="img/png" href="./assets/quote.svg" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
@@ -16,29 +12,43 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="quote-container" id="quote-container">
-      <!-- Quote -->
-      <div class="quote-text">
-        <i class="fas fa-quote-left"></i>
-        <span id="quote"></span>
+    <div class="content">
+      <div class="quote-container" id="quote-container">
+        <!-- Quote -->
+        <div class="quote-text">
+          <i class="fas fa-quote-left"></i>
+          <span id="quote"></span>
+        </div>
+
+        <!-- Author -->
+        <div class="quote-author">
+          <span id="author"></span>
+        </div>
+
+        <!-- Buttons -->
+        <div class="button-container">
+          <button class="twitter-button" id="twitter" title="Tweet This!">
+            <i class="fab fa-twitter"></i>
+          </button>
+          <button id="new-quote">New Quote</button>
+        </div>
       </div>
 
-      <!-- Author -->
-      <div class="quote-author">
-        <span id="author"></span>
-      </div>
+      <!-- Loader -->
+      <div class="loader" id="loader"></div>
 
-      <!-- Buttons -->
-      <div class="button-container">
-        <button class="twitter-button" id="twitter" title="Tweet This!">
-          <i class="fab fa-twitter"></i>
-        </button>
-        <button id="new-quote">New Quote</button>
-      </div>
+      <!-- Space for Footer -->
+      <div class="push"></div>
     </div>
 
-    <!-- Loader -->
-    <div class="loader" id="loader"></div>
+    <footer>
+      Icons made by
+      <a href="https://www.flaticon.com/authors/freepik" title="Freepik"
+        >Freepik</a
+      >
+      from
+      <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+    </footer>
 
     <!-- Script -->
     <script src="script.js"></script>
