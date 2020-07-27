@@ -108,6 +108,10 @@ button:active {
   font-size: 1.5rem;
 }
 
+.disabled {
+  pointer-events: none;
+}
+
 /* Loader */
 .loader {
   border: 16px solid #f3f3f3; /* Light grey */

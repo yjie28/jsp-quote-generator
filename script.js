@@ -5,24 +5,31 @@ const twitterBtn = document.getElementById('twitter');
 const newQuoteBtn = document.getElementById('new-quote');
 const loader = document.getElementById('loader');
 
-// Show Loading
-const loading = () => {
+/* for testing purposes, if there's too many error returned, stop making the api call */
+let errorCounter = 0;
+
+const showLoadingSpinner = () => {
   loader.hidden = false;
   quoteContainer.hidden = true;
 };
 
-// Hide Loading
-/* complete as to finish fetching the quote */
-const complete = () => {
+const removeLoadingSpinner = () => {
   if (!loader.hidden) {
     quoteContainer.hidden = false;
     loader.hidden = true;
   }
 };
 
+const showErrorMessage = () => {
+  quoteText.innerText = 'Oops, something is wrong! Please refresh the Page. ';
+  authorText.hidden = true;
+  twitterBtn.classList.add('disabled');
+  newQuoteBtn.classList.add('disabled');
+};
+
 // Get Quote From API
 const getQuote = async () => {
-  loading();
+  showLoadingSpinner();
 
   /* for CORS 
     original repo: https://github.com/Rob--W/cors-anywhere/
@@ -37,11 +44,11 @@ const getQuote = async () => {
     const data = await response.json();
 
     // Exclude quote by Donald Trump :)
-    if (data.quoteAuthor === 'Donald Trump') {
+    if (data.quoteAuthor == 'Donald Trump') {
       getQuote();
     }
 
-    // if author is blank, add 'Unknown
+    // if author is blank, add 'Unknown'
     if (!data.quoteAuthor) {
       authorText.innerText = '- Unknown';
     } else {
@@ -57,9 +64,16 @@ const getQuote = async () => {
     quoteText.innerText = data.quoteText;
 
     // Stop Loading and Show Quote
-    complete();
+    removeLoadingSpinner();
+    errorCounter = 0; // clear errorCount after a successful load
   } catch (error) {
-    getQuote();
+    if (errorCounter > 20) {
+      removeLoadingSpinner();
+      showErrorMessage();
+    } else {
+      errorCounter++;
+      getQuote();
+    }
   }
 };
 
