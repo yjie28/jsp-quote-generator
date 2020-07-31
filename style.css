@@ -41,10 +41,10 @@ body {
   max-width: 900px;
   padding: 20px 30px; /* top/botton and right/left */
   border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.6);
 
   /* horizontal, vertical offset; blur; radius; */
-  box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .quote-text {

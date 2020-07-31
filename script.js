@@ -27,6 +27,10 @@ const showErrorMessage = () => {
   newQuoteBtn.classList.add('disabled');
 };
 
+/* for keeping track of last and current quote */
+let currentQuote = '';
+let lastQuote = '';
+
 // Get Quote From API
 const getQuote = async () => {
   showLoadingSpinner();
@@ -44,28 +48,38 @@ const getQuote = async () => {
     const data = await response.json();
 
     // Exclude quote by Donald Trump :)
-    if (data.quoteAuthor == 'Donald Trump') {
+    if (data.quoteAuthor.split(' ').join('').toLowerCase() === 'donaldtrump') {
       getQuote();
     }
 
-    // if author is blank, add 'Unknown'
-    if (!data.quoteAuthor) {
-      authorText.innerText = '- Unknown';
-    } else {
-      authorText.innerText = '- ' + data.quoteAuthor;
-    }
+    // we don't want repeated quotes for 2 times in a row
+    currentQuote = data.quoteText;
 
-    // Reduce font size for long quotes
-    if (data.quoteText.length > 120) {
-      quoteText.classList.add('long-quote');
+    // if current quote is equal to last quote and last quote is not empty, get new quote
+    if (currentQuote === lastQuote && lastQuote) {
+      getQuote();
     } else {
-      quoteText.classList.remove('long-quote');
-    }
-    quoteText.innerText = data.quoteText;
+      // if author is blank, add 'Unknown'
+      if (!data.quoteAuthor) {
+        authorText.innerText = '- Unknown';
+      } else {
+        authorText.innerText = '- ' + data.quoteAuthor;
+      }
 
-    // Stop Loading and Show Quote
-    removeLoadingSpinner();
-    errorCounter = 0; // clear errorCount after a successful load
+      // Reduce font size for long quotes
+      if (currentQuote.length > 120) {
+        quoteText.classList.add('long-quote');
+      } else {
+        quoteText.classList.remove('long-quote');
+      }
+      quoteText.innerText = data.quoteText;
+
+      lastQuote = currentQuote;
+
+      // Stop Loading and Show Quote
+      removeLoadingSpinner();
+      errorCounter = 0; // clear errorCount after a successful load
+    }
   } catch (error) {
     if (errorCounter > 20) {
       removeLoadingSpinner();
@@ -81,7 +95,7 @@ const getQuote = async () => {
 const tweetQuote = () => {
   const quote = quoteText.innerText;
   const author = authorText.innerText;
-  const twitterUrl = `https://twitter.com/intent/tweet?text=${quote} - ${author}`;
+  const twitterUrl = `https://twitter.com/intent/tweet?text=${quote} ${author}`;
   window.open(twitterUrl, '_blank');
 };
 
