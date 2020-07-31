@@ -1,5 +1,6 @@
 # jsp-quote-generator
 
+★ [Quote Generator -- Live Demo](https://yjie28.github.io/jsp-quote-generator/) ★ <br />
 A random quote generator website that makes an asynchronous fetch request to a REST API to get quotes. 
 
 CSS Background: [Hero Pattern](https://www.heropatterns.com) <br />
