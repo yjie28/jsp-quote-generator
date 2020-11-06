@@ -37,6 +37,10 @@ const getQuote = async () => {
 
   /* for CORS 
     original repo: https://github.com/Rob--W/cors-anywhere/
+
+    fetch requests uses CORS policy. Might encounter CORS problem when using free 
+    APIs because they might NOT be properly configured to send CORS headers. 
+    (we are calling the forismatic API from our localhost in this case. )
   */
   const proxyUrl = 'https://peaceful-plateau-08683.herokuapp.com/';
 

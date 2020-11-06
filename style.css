@@ -5,9 +5,10 @@ html {
     whenever you add padding to an element, what could happen is
     the element might stretch the page. 
     Say you had a page that was 100 percent of the view ports width, 
-    if padding is added, it would extend beyong 100 percent, which adds a
+    if padding is added, it would extend beyond 100 percent, which adds a
     horizontal scroll bar. 
-    This prevents padding to add extra width/height to the page. 
+    
+    _This prevents padding to add extra width/height to the page. _
     */
   box-sizing: border-box;
 }
@@ -124,12 +125,13 @@ button:active {
   animation: spin 2s linear infinite;
 }
 
-footer,
-.push {
+footer {
   text-align: center;
   height: 50px;
   font-family: 'Montserrat';
   font-size: 14px;
+  color: #fff;
+  text-shadow: 1px 1px #312a2a;
 }
 
 a {
